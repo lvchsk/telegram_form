@@ -5,13 +5,13 @@ module.exports = async (req, res) => {
     return res.status(405).send('Метод не разрешён');
   }
 
-  const { name, email, message } = req.body;
+  const { name, phone, email, cart } = req.body;
 
   const BOT_TOKEN = process.env.BOT_TOKEN;
   const CHAT_ID = process.env.CHAT_ID;
   const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
-  const text = `Новая заявка с сайта:\n\nИмя: ${name}\nEmail: ${email}\nСообщение: ${message}`;
+  const text = `Новая заявка с сайта:\n\nИмя: ${name}\nТелефон: ${phone}\nEmail: ${email}\nЗаказ: ${cart}`;
 
   try {
     await axios.post(TELEGRAM_API_URL, {
